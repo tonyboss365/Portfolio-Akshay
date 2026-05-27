@@ -1,10 +1,10 @@
 <div align="center">
 
-# ✦ Akshay Kumar Reddy — Portfolio
+#  Akshay Kumar Reddy — Portfolio
 
 **A fast, modern, accessible portfolio built with Vite + React + TypeScript**
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-4f46e5?style=for-the-badge&logo=vercel)](https://your-portfolio-url.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-4f46e5?style=for-the-badge&logo=vercel)](https://portfolio-akshay-five.vercel.app)
 [![GitHub Stars](https://img.shields.io/github/stars/akshay-kumar-reddy/portfolio?style=for-the-badge&logo=github)](https://github.com/akshay-kumar-reddy/portfolio)
 [![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 
@@ -63,7 +63,7 @@ portfolio/
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/your-username/portfolio.git
+git clone https://github.com/akshay-kumar-reddy/portfolio.git
 cd portfolio
 
 # 2. Install dependencies
@@ -91,8 +91,6 @@ The `/dist` folder is a fully static build — drop it on any host.
 | **Vercel** | `vercel --prod` or connect your GitHub repo in the dashboard |
 | **Netlify** | Drag-and-drop `/dist` at app.netlify.com, or use the CLI |
 | **GitHub Pages** | Push `/dist` to the `gh-pages` branch (use the `gh-pages` npm package) |
-
-> Replace the `Live Demo` badge URL at the top once your site is deployed!
 
 ## 🗺️ Architecture & Flow
 
