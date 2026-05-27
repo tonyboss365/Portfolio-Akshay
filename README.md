@@ -1,6 +1,6 @@
 <div align="center">
 
-#  Akshay Kumar Reddy — Portfolio
+# ✦ Akshay Kumar Reddy — Portfolio
 
 **A fast, modern, accessible portfolio built with Vite + React + TypeScript**
 
@@ -11,6 +11,8 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)
 ![React](https://img.shields.io/badge/React-61dafb?style=flat-square&logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-646cff?style=flat-square&logo=vite&logoColor=white)
+
+### 🌐 Live Site → [portfolio-akshay-five.vercel.app](https://portfolio-akshay-five.vercel.app)
 
 </div>
 
