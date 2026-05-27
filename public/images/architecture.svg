@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300" viewBox="0 0 800 300">
+  <style>
+    .box { fill:#312e81; stroke:#1e293b; stroke-width:2; }
+    .text { font: 14px sans-serif; fill: #fff }
+  </style>
+  <rect x="50" y="40" width="220" height="80" rx="8" class="box" />
+  <text x="160" y="86" text-anchor="middle" class="text">UI Layer</text>
+  <text x="160" y="106" text-anchor="middle" class="text">React + Components</text>
+
+  <rect x="290" y="40" width="220" height="80" rx="8" class="box" />
+  <text x="400" y="86" text-anchor="middle" class="text">Build / Tooling</text>
+  <text x="400" y="106" text-anchor="middle" class="text">Vite, TypeScript</text>
+
+  <rect x="530" y="40" width="220" height="80" rx="8" class="box" />
+  <text x="640" y="86" text-anchor="middle" class="text">Hosting / CDN</text>
+  <text x="640" y="106" text-anchor="middle" class="text">Static site deploy</text>
+
+  <text x="400" y="180" text-anchor="middle" font-family="sans-serif" font-size="13">Lightweight, static-first portfolio optimized for performance</text>
+</svg>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <style>
+    .box { fill:#0ea5a4; stroke:#064e4e; stroke-width:2; }
+    .text { font: 16px sans-serif; fill: #fff }
+    .arrow { stroke:#333; stroke-width:2; marker-end:url(#arrowhead); }
+  </style>
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+    </marker>
+  </defs>
+  <rect x="50" y="40" width="200" height="60" rx="8" class="box" />
+  <text x="150" y="78" text-anchor="middle" class="text">Client (Browser)</text>
+
+  <rect x="300" y="40" width="220" height="60" rx="8" class="box" />
+  <text x="410" y="78" text-anchor="middle" class="text">Vite + React App</text>
+
+  <rect x="560" y="40" width="180" height="60" rx="8" class="box" />
+  <text x="650" y="78" text-anchor="middle" class="text">Static Assets</text>
+
+  <line x1="250" y1="70" x2="300" y2="70" class="arrow" />
+  <line x1="520" y1="70" x2="560" y2="70" class="arrow" />
+
+  <rect x="300" y="150" width="220" height="60" rx="8" fill="#ef4444" stroke="#7f1d1d" stroke-width="2"/>
+  <text x="410" y="188" text-anchor="middle" class="text">Components & Pages</text>
+
+  <line x1="410" y1="100" x2="410" y2="150" class="arrow" />
+
+  <text x="400" y="230" text-anchor="middle" font-family="sans-serif" font-size="13">Flow: user → app → components → static assets</text>
+</svg>

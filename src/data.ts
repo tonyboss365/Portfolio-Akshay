@@ -17,7 +17,7 @@ export const RESUME_DATA = {
     programming: ["Python", "Java", "C", "JavaScript", "TypeScript"],
     frontend: ["HTML", "CSS", "React.js", "Next.js", "Tailwind CSS"],
     backend: ["Node.js", "Express.js", "FastAPI", "REST APIs", "WebSockets"],
-    databases: ["MySQL", "MongoDB", "SQLite"],
+    databases: ["MySQL", "MongoDB", "SQLite", "Firebase", "Supabase"],
     ai_data: ["NumPy", "Pandas", "Scikit-learn", "Machine Learning"],
     tools: ["Git", "GitHub", "VS Code", "Vercel", "Render", "Railway"],
     core_cs: ["Data Structures", "Algorithms", "Object-Oriented Programming", "DBMS", "Operating Systems", "Computer Networks"]
@@ -111,7 +111,7 @@ export const RESUME_DATA = {
       tech: ["Interactive UI", "JavaScript", "Chart.js"],
       github: "github.com/tonyboss365/CFO-HELPER",
       live: "tonyboss365.github.io/CFO-HELPER",
-      image: "/placeholder.svg",
+      image: "/cfo-preview.png",
       features: ["Budget planning", "Cash flow projection", "Scenario modeling", "KPI dashboards"]
     },
     {
