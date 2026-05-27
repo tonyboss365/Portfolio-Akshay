@@ -68,119 +68,119 @@ function FormattedMessage({ text, onCloseChat }: { text: string; onCloseChat?: (
 
   return (
     <div className="space-y-2 font-sans text-xs sm:text-sm text-[#1a1a1a]/95 dark:text-slate-300 leading-relaxed">
-      {lines.map((line, lineIdx) => {
-        const trimmed = line.trim();
-        
-        // Skip markdown block ticks, placeholders, dividers
-        if (
-          trimmed.startsWith("```") || 
-          trimmed === "[SUGGESTIONS]" || 
-          trimmed === "--" || 
-          trimmed === "---" || 
-          trimmed === ""
-        ) {
-          return null;
-        }
-
-        // Process [NAVIGATE: /route] tags
-        if (trimmed.startsWith("[NAVIGATE:") && trimmed.endsWith("]")) {
-          const route = trimmed.slice(trimmed.indexOf(":") + 1, -1).trim();
-          let label = "Explore Section";
-          let icon = "⚡";
-          
-          if (route === "/education") {
-            label = "Jump to Education & Hackathons Timeline";
-            icon = "🎓";
-          } else if (route === "/skills") {
-            label = "Explore Technical Stack & Skills Overview";
-            icon = "🛠️";
-          } else if (route === "/projects") {
-            label = "Explore Selected Custom Projects Portfolio";
-            icon = "💻";
-          } else if (route === "/") {
-            label = "Go back to Home Page";
-            icon = "🏠";
-          }
-
-          return (
-            <motion.button
-              whileHover={{ scale: 1.02, y: -1 }}
-              whileTap={{ scale: 0.98 }}
-              key={lineIdx}
-              onClick={() => {
-                navigate(route);
-                if (onCloseChat) onCloseChat();
-              }}
-              className="mt-3 w-full flex items-center justify-between p-3.5 bg-blue-600 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700 text-white rounded-xl text-xs font-mono font-bold cursor-pointer border border-blue-500 dark:border-blue-600 shadow-md transition-all select-none gap-3"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-sm select-none">{icon}</span>
-                <span className="font-sans font-bold text-left">{label}</span>
-              </div>
-              <span className="text-[9px] font-sans font-bold bg-blue-700 dark:bg-blue-800 text-blue-100 border border-blue-800 px-2 py-0.5 rounded shadow-sm shrink-0">
-                REDIRECT →
-              </span>
-            </motion.button>
-          );
-        }
-
-        // Handle headers (### or ## or #)
-        if (trimmed.startsWith("###") || trimmed.startsWith("##") || trimmed.startsWith("#")) {
-          const cleanText = trimmed.replace(/^#+\s*/, "");
-          return (
-            <h4 key={lineIdx} className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 font-mono mt-4 mb-1.5 uppercase tracking-wider">
-              {cleanText}
-            </h4>
-          );
-        }
-
-        // Handle clean headers that are just bolded (e.g. **CONCLUSION**) on a line by itself
-        if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.includes(" ", trimmed.length - 3) && trimmed.length < 30) {
-          const cleanText = trimmed.slice(2, -2).trim();
-          return (
-            <h4 key={lineIdx} className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 font-mono mt-4 mb-1.5 uppercase tracking-wider">
-              {cleanText}
-            </h4>
-          );
-        }
-        
-        // Handle bullet points
-        const isBullet = trimmed.startsWith("-") || trimmed.startsWith("*") || trimmed.startsWith("•");
-        const content = isBullet ? trimmed.substring(1).trim() : line;
-        
-        if (content.trim() === "" || content.trim() === "--") {
-          return null;
-        }
-        
-        // Process bold (**...**) within the line
-        const parts = content.split(/(\*\*.*?\*\*)/g);
-        const processedContent = parts.map((part, partIdx) => {
-          if (part.startsWith("**") && part.endsWith("**")) {
-            const innerText = part.slice(2, -2);
+          {lines.map((line, lineIdx) => {
+            const trimmed = line.trim();
+            
+            // Skip markdown block ticks, placeholders, dividers
+            if (
+              trimmed.startsWith("```") || 
+              trimmed === "[SUGGESTIONS]" || 
+              trimmed === "--" || 
+              trimmed === "---" || 
+              trimmed === ""
+            ) {
+              return null;
+            }
+            
+            // Process [NAVIGATE: /route] tags
+            if (trimmed.startsWith("[NAVIGATE:") && trimmed.endsWith("]")) {
+              const route = trimmed.slice(trimmed.indexOf(":") + 1, -1).trim();
+              let label = "Explore Section";
+              let icon = "⚡";
+              
+              if (route === "/education") {
+                label = "Jump to Education & Hackathons Timeline";
+                icon = "🎓";
+              } else if (route === "/skills") {
+                label = "Explore Technical Stack & Skills Overview";
+                icon = "🛠️";
+              } else if (route === "/projects") {
+                label = "Explore Selected Custom Projects Portfolio";
+                icon = "💻";
+              } else if (route === "/") {
+                label = "Go back to Home Page";
+                icon = "🏠";
+              }
+              
+              return (
+                <motion.button
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  key={lineIdx}
+                  onClick={() => {
+                    navigate(route);
+                    if (onCloseChat) onCloseChat();
+                  }}
+                  className="mt-3 w-full flex items-center justify-between p-3.5 bg-blue-600 dark:bg-blue-600 hover:bg-blue-700 dark:hover:bg-blue-700 text-white rounded-xl text-xs font-mono font-bold cursor-pointer border border-blue-500 dark:border-blue-600 shadow-md transition-all select-none gap-3"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm select-none">{icon}</span>
+                    <span className="font-sans font-bold text-left">{label}</span>
+                  </div>
+                  <span className="text-[9px] font-sans font-bold bg-blue-700 dark:bg-blue-800 text-blue-100 border border-blue-800 px-2 py-0.5 rounded shadow-sm shrink-0">
+                    REDIRECT →
+                  </span>
+                </motion.button>
+              );
+            }
+            
+            // Handle headers (### or ## or #)
+            if (trimmed.startsWith("###") || trimmed.startsWith("##") || trimmed.startsWith("#")) {
+              const cleanText = trimmed.replace(/^#+\s*/, "");
+              return (
+                <h4 key={lineIdx} className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 font-mono mt-4 mb-1.5 uppercase tracking-wider">
+                  {cleanText}
+                </h4>
+              );
+            }
+            
+            // Handle clean headers that are just bolded (e.g. **CONCLUSION**) on a line by itself
+            if (trimmed.startsWith("**") && trimmed.endsWith("**") && !trimmed.includes(" ", trimmed.length - 3) && trimmed.length < 30) {
+              const cleanText = trimmed.slice(2, -2).trim();
+              return (
+                <h4 key={lineIdx} className="text-xs sm:text-sm font-bold text-blue-600 dark:text-blue-400 font-mono mt-4 mb-1.5 uppercase tracking-wider">
+                  {cleanText}
+                </h4>
+              );
+            }
+            
+            // Handle bullet points
+            const isBullet = trimmed.startsWith("-") || trimmed.startsWith("*") || trimmed.startsWith("•");
+            const content = isBullet ? trimmed.substring(1).trim() : line;
+            
+            if (content.trim() === "" || content.trim() === "--") {
+              return null;
+            }
+            
+            // Process bold (**...**) within the line
+            const parts = content.split(/(\*\*.*?\*\*)/g);
+            const processedContent = parts.map((part, partIdx) => {
+              if (part.startsWith("**") && part.endsWith("**")) {
+                const innerText = part.slice(2, -2);
+                return (
+                  <strong key={partIdx} className="text-blue-600 dark:text-blue-400 font-bold font-mono">
+                    {innerText}
+                  </strong>
+                );
+              }
+              return <span key={partIdx}>{part}</span>;
+            });
+            
+            if (isBullet) {
+              return (
+                <div key={lineIdx} className="flex gap-2 pl-2">
+                  <span className="text-blue-500 dark:text-blue-400 font-bold select-none">•</span>
+                  <p className="flex-1">{processedContent}</p>
+                </div>
+              );
+            }
+            
             return (
-              <strong key={partIdx} className="text-blue-600 dark:text-blue-400 font-bold font-mono">
-                {innerText}
-              </strong>
+              <p key={lineIdx} className="min-h-[1em]">
+                {processedContent}
+              </p>
             );
-          }
-          return <span key={partIdx}>{part}</span>;
-        });
-
-        if (isBullet) {
-          return (
-            <div key={lineIdx} className="flex gap-2 pl-2">
-              <span className="text-blue-500 dark:text-blue-400 font-bold select-none">•</span>
-              <p className="flex-1">{processedContent}</p>
-            </div>
-          );
-        }
-
-        return (
-          <p key={lineIdx} className="min-h-[1em]">
-            {processedContent}
-          </p>
-        );
-      })}
+          })}
     </div>
   );
 }
