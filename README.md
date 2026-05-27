@@ -1,121 +1,133 @@
+<div align="center">
 
-# Akshay Kumar Reddy — Portfolio
+# ✦ Akshay Kumar Reddy — Portfolio
 
-![Portfolio Banner](public/images/portfolio-text.svg)
+**A fast, modern, accessible portfolio built with Vite + React + TypeScript**
 
-## Overview
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Site-4f46e5?style=for-the-badge&logo=vercel)](https://your-portfolio-url.vercel.app)
+[![GitHub Stars](https://img.shields.io/github/stars/akshay-kumar-reddy/portfolio?style=for-the-badge&logo=github)](https://github.com/akshay-kumar-reddy/portfolio)
+[![License: MIT](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
 
-This repository holds the source for a fast, modern portfolio site built with Vite + React + TypeScript. It highlights projects, skills, and accomplishments, and is designed to be deployed as a static site (Netlify, Vercel, GitHub Pages or a CDN).
+![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-61dafb?style=flat-square&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646cff?style=flat-square&logo=vite&logoColor=white)
 
-Key goals:
-- Present work and projects clearly for recruiters and collaborators.
-- Be performant, accessible, and mobile-first.
-- Keep the repo simple, static-first, and easy to deploy.
-
-## Live preview
-
-If you prefer, I can set up a GitHub Pages or Vercel deployment and add the link here.
-
-## Features
-
-- Lightweight React + TypeScript app scaffolded with Vite
-- Theme toggle (light/dark)
-- Component-driven architecture for easy extension
-- Accessible, responsive layout
-- Small static assets and SVG flowcharts for documentation
-
-## Tech stack
-
-- Framework: React (with TypeScript)
-- Bundler: Vite
-- Styling: CSS (utility classes / custom styles)
-- Build output: static files ready for CDN deployment
-
-## Project structure
-
-- `src/` — application source
-   - `main.tsx`, `App.tsx` — app entry and root
-   - `components/` — reusable UI components
-   - `data.ts` — project / content metadata
-- `public/` — static assets (images, icons)
-- `index.html`, `vite.config.ts`, `tsconfig.json` — build configuration
-
-## Flow & Architecture
-
-High-level flow:
-
-![Flowchart](public/images/flowchart.svg)
-
-Architecture overview:
-
-![Architecture](public/images/architecture.svg)
-
-Design notes:
-- The site is static-first: content and images live in `public/` and are served directly.
-- Client-side React is used for interactivity (theme toggle, small widgets).
-
-## Screenshots
-
-Placeholder screenshots are included in `public/images/`. Replace these with real screenshots by adding image files and updating the README.
-
-## How to run locally
-
-1. Install dependencies
-
-```bash
-npm install
-```
-
-2. Start dev server
-
-```bash
-npm run dev
-```
-
-3. Build for production
-
-```bash
-npm run build
-```
-
-## Deployment
-
-The build output (`dist/`) is static and can be deployed to any static host. Example using GitHub Pages or Vercel is easy to add — tell me which you prefer and I'll add a deploy workflow.
-
-## Contributing
-
-- Create a branch, open a PR with a short description.
-- Avoid committing secrets (API keys) — use environment variables and `.env` for local work.
-
-## License
-
-This project is released under the MIT License — see `LICENSE`.
+</div>
 
 ---
 
-If you'd like, I can:
-- Add polished screenshots from your local device.
-- Add a small CI/CD workflow for automatic deploys (GitHub Actions).
-- Generate a more detailed architecture diagram (Mermaid or SVG) and embed it here.
+## 📌 About
 
-Tell me which of the above to do next and I'll update the repo.
+A clean, performant personal portfolio that presents my projects, skills, and story to recruiters and collaborators. Built for speed, accessibility, and easy deployment on any static host.
+
+## ✨ Features
+
+- ⚡ **Vite-powered** — near-instant HMR and lightning-fast builds
+- 🌗 **Dark / Light theme toggle** — system preference respected
+- 📱 **Mobile-first responsive layout** — looks great on any screen
+- ♿ **Accessible** — semantic HTML, keyboard-navigable, screen-reader friendly
+- 🗂️ **Component-driven** — easy to extend and maintain
+- 🚀 **Static output** — deploy to Vercel, Netlify, or GitHub Pages in minutes
+
+## 🛠️ Tech Stack
+
+| Layer | Tech |
+|---|---|
+| Framework | React 18 (TypeScript) |
+| Bundler | Vite |
+| Styling | CSS (utility + custom) |
+| Deployment | Vercel / Netlify / GitHub Pages |
+
+## 📁 Project Structure
+
+```
+portfolio/
+├── public/
+│   └── images/          # Static assets (SVGs, screenshots)
+├── src/
+│   ├── components/      # Reusable UI components
+│   ├── data.ts          # Project & content metadata
+│   ├── App.tsx          # Root component
+│   └── main.tsx         # App entry point
+├── index.html
+├── vite.config.ts
+└── tsconfig.json
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+- **Node.js** v18 or later
+
+### Run Locally
+
+```bash
+# 1. Clone the repo
+git clone https://github.com/your-username/portfolio.git
+cd portfolio
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the dev server
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build for Production
+
+```bash
+npm run build       # Output goes to /dist
+npm run preview     # Preview the production build locally
+```
+
+## ☁️ Deployment
+
+The `/dist` folder is a fully static build — drop it on any host.
+
+| Platform | How to deploy |
+|---|---|
+| **Vercel** | `vercel --prod` or connect your GitHub repo in the dashboard |
+| **Netlify** | Drag-and-drop `/dist` at app.netlify.com, or use the CLI |
+| **GitHub Pages** | Push `/dist` to the `gh-pages` branch (use the `gh-pages` npm package) |
+
+> Replace the `Live Demo` badge URL at the top once your site is deployed!
+
+## 🗺️ Architecture & Flow
+
+**High-level app flow:**
+
+![Flowchart](public/images/flowchart.svg)
+
+**Component architecture:**
+
+![Architecture](public/images/architecture.svg)
+
+**Design philosophy:**
+- Content and images live in `public/` and are served directly — no runtime data fetching.
+- React handles interactivity only (theme toggle, micro-interactions).
+- All routing is client-side; no server required.
+
+## 🤝 Contributing
+
+1. Fork the repo and create a feature branch: `git checkout -b feat/your-feature`
+2. Make your changes and commit: `git commit -m "feat: add X"`
+3. Push to your branch: `git push origin feat/your-feature`
+4. Open a Pull Request with a short description of the change
+
+> 🔐 Never commit secrets — use `.env.local` for environment variables and make sure `.env.local` is in your `.gitignore`.
+
+## 📄 License
+
+Released under the [MIT License](LICENSE). Free to use, modify, and distribute.
+
+---
+
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
+
+Made with ☕ by **Akshay Kumar Reddy**
+
+[LinkedIn](https://linkedin.com/in/your-profile) · [GitHub](https://github.com/your-username) · [Email](mailto:your@email.com)
+
 </div>
-
-# Run and deploy your AI Studio app
-
-This contains everything you need to run your app locally.
-
-View your app in AI Studio: https://ai.studio/apps/1b0e88fb-d1a3-40a1-810a-7a017170f839
-
-## Run Locally
-
-**Prerequisites:**  Node.js
-
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
