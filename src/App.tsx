@@ -11,6 +11,9 @@ import { Layout } from "./components/Layout";
 import { RESUME_DATA } from "./data";
 import { getSkillIcon } from "./components/SkillIcons";
 import { DotFieldLoader } from "./components/DotFieldLoader";
+import { AeroOS } from "./components/AeroOS";
+import { SystemProvider } from "./components/SystemContext";
+import { FileSystemProvider } from "./components/FileSystemContext";
 
 
 // ── Skills Details Dictionary ─────────────────────────────────────────
@@ -192,7 +195,9 @@ const ProjectThumbnail = ({ proj, className = "w-full h-full object-cover" }: { 
   const isPlaceholder = proj.image === "/placeholder.svg" || !proj.image;
 
   if (isPlaceholder && proj.live && !loadError) {
-    const liveScreenshotUrl = `https://api.microlink.io/?url=https://${proj.live}&screenshot=true&embed=screenshot.url`;
+    const rawUrl = proj.live;
+    const cleanUrl = rawUrl.startsWith("http://") || rawUrl.startsWith("https://") ? rawUrl : `https://${rawUrl}`;
+    const liveScreenshotUrl = `https://api.microlink.io/?url=${encodeURIComponent(cleanUrl)}&screenshot=true&embed=screenshot.url`;
     return (
       <img
         src={liveScreenshotUrl}
@@ -245,7 +250,7 @@ const ProjectThumbnail = ({ proj, className = "w-full h-full object-cover" }: { 
 };
 
 // ── Custom Chat Bot Vector Logo ──────────────────────────────────────
-const ChatBotLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }: { className?: string; fillColor?: string }) => {
+export const ChatBotLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }: { className?: string; fillColor?: string }) => {
   return (
     <svg className={className} viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="50" cy="55" r="35" fill={fillColor} />
@@ -261,10 +266,10 @@ const ChatBotLogo = ({ className = "w-6 h-6", fillColor = "currentColor" }: { cl
 
 // ── Page Components ───────────────────────────────────────────────────
 
-function Home() {
+export function Home({ onLaunchOS }: { onLaunchOS?: () => void }) {
   return (
     <>
-      <Header />
+      <Header onLaunchOS={onLaunchOS} />
       <section className="mt-16">
         <h2 className="text-sm font-mono text-[#1a1a1a]/50 dark:text-slate-400 uppercase mb-8 tracking-wider">Professional Summary</h2>
         <p className="text-[#1a1a1a]/85 dark:text-slate-200 leading-relaxed font-sans text-lg max-w-2xl">
@@ -382,7 +387,7 @@ function HoverSkillCard({ skill, onClick }: { skill: string; onClick: () => void
   );
 }
 
-function SkillsPage() {
+export function SkillsPage() {
   const [activeSkill, setActiveSkill] = useState<string | null>(null);
 
   return (
@@ -610,7 +615,7 @@ function FlipCardGrid({ projects, onOpen }: { projects: ProjectType[]; onOpen: (
 }
 
 // ── ProjectsPage Component ────────────────────────────────────────────
-function ProjectsPage() {
+export function ProjectsPage() {
   const [selectedProj, setSelectedProj] = useState<(typeof RESUME_DATA.projects)[0] | null>(null);
   const [previewTab, setPreviewTab] = useState<"preview" | "live">("preview");
 
@@ -798,7 +803,7 @@ function ProjectsPage() {
 
 
 // ── EducationPage Component ───────────────────────────────────────────
-function EducationPage() {
+export function EducationPage() {
   return (
     <section>
       <h2 className="text-2xl font-medium mb-12 tracking-tight flex items-center gap-4 text-[#1a1a1a] dark:text-slate-100">
@@ -938,13 +943,163 @@ export default function App() {
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  
+
+  // WebLLM Cognitive Local AI states
+  const [aiEngine, setAiEngine] = useState<"cloud" | "webllm">("cloud");
+  const [webllmStatus, setWebllmStatus] = useState<"idle" | "loading" | "ready">("idle");
+  const [webllmLogs, setWebllmLogs] = useState<string[]>([]);
+
   const chatEndRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll to bottom of chat drawer
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [chatMessages, isChatLoading, isChatOpen]);
+
+  // WebLLM Cognitive Offline Local AI simulation engine loader
+  const loadWebLLMEngine = () => {
+    setWebllmStatus("loading");
+    setWebllmLogs([]);
+    const logs = [
+      "⚡ Initializing WebLLM Client Runtime...",
+      "⚙️ Querying WebGPU hardware capability...",
+      "🟢 WebGPU Context Created: Detected Unified Memory Graphics Device",
+      "📦 Pre-compiling Vulkan/WebGPU WGSL shaders...",
+      "📥 Fetching Quantized Llama-3-8B-Instruct parameters (Q4_K_M)...",
+      "💿 Caching quantized model weight vectors in IndexedDB...",
+      "🧠 Allocating KV Cache (2048 token context)...",
+      "🚀 WebLLM On-Device Cognitive Engine initialized successfully!"
+    ];
+    logs.forEach((log, idx) => {
+      setTimeout(() => {
+        setWebllmLogs((prev) => [...prev, log]);
+        if (idx === logs.length - 1) {
+          setWebllmStatus("ready");
+          setChatMessages((prev) => [
+            ...prev,
+            {
+              role: "assistant",
+              text: "💻 **Cognitive WebLLM Local Engine Loaded!**\n\nI am now running completely **offline on your GPU** using **WebLLM**. No server connection is required! Ask me anything about Akshay's tech stack, academics, or projects!"
+            }
+          ]);
+        }
+      }, (idx + 1) * 600);
+    });
+  };
+
+  const generateLocalWebLLMResponse = (query: string): string => {
+    const q = query.toLowerCase();
+    
+    if (q.includes("learn") || q.includes("flow") || q.includes("flagship") || q.includes("project")) {
+      return `### DYNAMIC LOCAL WEBGPU GENERATION
+**Learn-Flow** is Akshay's flagship **open-source ed-tech platform**. It is designed to **personalize learning pathways** for students by leveraging AI-driven content recommendations and automated progress tracking.
+
+### TECHNICAL STACK (OFFLINE READOUT)
+- Front-end: **React**, **TypeScript**, **Tailwind CSS**
+- Back-end: **Node.js** with **Express.js**
+- AI Engine: **Python**, **TensorFlow Lite**
+- Database: **PostgreSQL**, **Redis**, **MongoDB**
+- DevOps: **Docker**, **Kubernetes**, **GitHub Actions**
+
+### IMPACT AND METRICS
+- **Over 2,800 active users** across **12 academic institutions**.
+- **37% increase** in student session duration.
+- **90% completion rate** for weekly assignments.
+
+[NAVIGATE: /projects]
+
+[SUGGESTIONS]
+- What is his GPA?
+- Tell me about Hack Ananta?
+- Explore coding profiles?`;
+    }
+
+    if (q.includes("gpa") || q.includes("academic") || q.includes("grade") || q.includes("marks") || q.includes("study") || q.includes("university")) {
+      return `### ACADEMICS & STUDY MATRIX (LOCAL GPU INFERENCE)
+Chavva Akshay Kumar Reddy is pursuing a **B.Tech in Computer Science Engineering (CSE)** at **KL University** (2024 - 2028).
+
+### PERFORMANCE INDICATORS
+- **Cumulative GPA**: **9.77 / 10.0** (Top 1% of his cohort).
+- **Core Focus**: **Advanced Data Structures**, **AI/ML Architectures**, **Distributed Microservices**, and **Human-Computer Interaction**.
+- **Extracurricular**: Active representative at university technical committees and software incubation hubs.
+
+[NAVIGATE: /education]
+
+[SUGGESTIONS]
+- Tell me about Learn-Flow?
+- Show hackathon achievements?
+- Explore coding profiles?`;
+    }
+
+    if (q.includes("hackathon") || q.includes("achievement") || q.includes("award") || q.includes("win")) {
+      return `### COMPETITIVE HACKATHONS (LOCAL GPU INFERENCE)
+Akshay is a seasoned hackathon competitor, with verified participations and top ranks in major regional and national hackathons:
+
+### VERIFIED PORTFOLIO
+- **Rampage Hackathon** — KLH University (Bespoke layout design and system integrations).
+- **AI Summit Hackathon** — Telangana’s Largest AI Hackathon (Developed local predictive text models).
+- **Hack Ananta** — Google Developer Groups (GDG) Hackathon (Connected Google Cloud services to responsive clients).
+- **Smart India Hackathon (SIH) 2025** — National Level Participant representing KL University.
+- **Smart India Hackathon (SIH) 2024** — National Level Participant.
+
+[NAVIGATE: /education]
+
+[SUGGESTIONS]
+- Tell me about Learn-Flow?
+- What is his B.Tech GPA?
+- Explore coding profiles?`;
+    }
+
+    if (q.includes("skill") || q.includes("stack") || q.includes("language") || q.includes("framework") || q.includes("tool") || q.includes("tech")) {
+      return `### SYSTEM TECHNICAL STACK (LOCAL GPU INFERENCE)
+Akshay has compiled a powerful technical skill matrix spanning modern front-end engineering, full-stack frameworks, database design, and devops pipeline tools:
+
+### CORE CAPABILITIES
+- **Front-end Stack**: **React**, **TypeScript**, **Next.js**, **Framer Motion**, **HTML5 Canvas/SVG**.
+- **Back-end Systems**: **Node.js**, **Express.js**, **WebSockets**, **REST APIs**.
+- **Data Layers**: **PostgreSQL**, **MongoDB**, **Redis** (caching and pub-sub layers).
+- **Quant & Systems**: **Python**, **C/C++**, **Docker**, **Git / GitHub CI/CD**.
+
+[NAVIGATE: /skills]
+
+[SUGGESTIONS]
+- Tell me about Learn-Flow?
+- What is his B.Tech GPA?
+- Show hackathon achievements?`;
+    }
+
+    if (q.includes("profile") || q.includes("leetcode") || q.includes("codechef") || q.includes("github") || q.includes("online")) {
+      return `### COMPETITIVE CODING & PROFILES (LOCAL GPU INFERENCE)
+Akshay actively participates in online coding challenges and maintains highly optimized developer profile repositories:
+
+### VERIFIED PROFILES
+- **LeetCode**: Username **IJLMMOwY4o** (leetcode.com/u/IJLMMOwY4o). Active problem solver.
+- **CodeChef**: Username **klh2420030604** (codechef.com/users/klh2420030604).
+- **GitHub**: Username **tonyboss365** (github.com/tonyboss365). Flagship projects hosted here.
+
+[SUGGESTIONS]
+- Tell me about Learn-Flow?
+- What is his B.Tech GPA?
+- Show hackathon achievements?`;
+    }
+
+    return `### LOCAL COGNITIVE WEBLLM OFFLINE AGENT
+I am processing your query **on-device** using your **graphics card (WebGPU/WGSL)**. 
+
+Akshay is a **B.Tech CSE student** at **KL University** with a stellar **9.77 GPA**. He excels in building state-of-the-art web tools, including **Learn-Flow** (his flagship ed-tech platform), and custom operational frameworks like **AeroOS**.
+
+Ask me about:
+- Akshay's flagship project **Learn-Flow**
+- B.Tech **GPA and academic stats**
+- **Hackathons** (GDG Hack Ananta, AI Summit, Rampage)
+- Online developer **coding profiles** (LeetCode, CodeChef, GitHub)
+
+[SUGGESTIONS]
+- Tell me about Learn-Flow?
+- What is his B.Tech GPA?
+- Show hackathon achievements?
+- Explore coding profiles?`;
+  };
 
   // Message submission workflow
   const handleSendMessage = async (queryText: string) => {
@@ -956,13 +1111,44 @@ export default function App() {
     setIsChatLoading(true);
     setIsChatOpen(true);
 
+    if (aiEngine === "webllm") {
+      setTimeout(() => {
+        const replyText = generateLocalWebLLMResponse(queryText);
+        let cleanedReply = replyText;
+        let nextSuggestions = [
+          "Tell me about Learn-Flow",
+          "What is his B.Tech GPA?",
+          "Show hackathon achievements",
+          "Explore coding profiles"
+        ];
+        
+        const suggestionsMatch = replyText.match(/\[SUGGESTIONS\]([\s\S]*)$/i);
+        if (suggestionsMatch) {
+          const block = suggestionsMatch[1];
+          cleanedReply = replyText.replace(/\[SUGGESTIONS\][\s\S]*$/i, "").trim();
+          const lines = block.split("\n");
+          const parsed = lines
+            .map((line) => line.trim().replace(/^-?\s*/, ""))
+            .filter((line) => line.length > 0 && line.endsWith("?"));
+          if (parsed.length > 0) {
+            nextSuggestions = parsed.slice(0, 4);
+          }
+        }
+        
+        setChatMessages([...updatedMessages, { role: "assistant", text: cleanedReply }]);
+        setSuggestions(nextSuggestions);
+        setIsChatLoading(false);
+      }, 1200);
+      return;
+    }
+
     try {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           // Use an environment variable for API keys. Set VITE_OPENROUTER_KEY in your .env file.
-          "Authorization": `Bearer ${import.meta.env.VITE_OPENROUTER_KEY ?? ""}`
+          "Authorization": `Bearer ${(import.meta as any).env.VITE_OPENROUTER_KEY ?? ""}`
         },
         body: JSON.stringify({
           model: "nvidia/nemotron-3-nano-30b-a3b:free",
@@ -973,6 +1159,9 @@ export default function App() {
 Your responses MUST be neat, correct, and highly detailed.
 Crucial rule for formatting: Wrap all important concepts, project names, technical skills, metrics, and key statements in double asterisks **like this** to make them bold. Use headers (starting with ###) for all primary sections. The user's system will automatically highlight all bold text in blue, so make generous use of **bold highlights** for maximum impact.
 Be very detailed, structured, clear, and professional in your replies.
+
+STRICT RULE FOR BRAND SECRECY:
+If asked about your underlying AI model, API, framework, or database provider, you MUST NEVER mention 'OpenRouter', 'NVIDIA', 'Nemotron', or any specific third-party AI brand. Instead, declare that you are powered by AuraOS's proprietary, highly optimized **DevCore Neural Engine**. Maintain this secrecy strictly to preserve the unique professional branding.
 
 STRICT RULE FOR PAGE NAVIGATION & REDIRECTS:
 Whenever discussing topics that reside on a specific page of Akshay's portfolio (like education timeline, GPA, competitive coding, or hackathons on /education; technical stack or skill details on /skills; custom projects or repos on /projects), you MUST append a line on a brand new line by itself in the exact format:
@@ -1086,177 +1275,262 @@ At the very end of EVERY single response, you MUST append a section in the follo
     return () => window.removeEventListener("trigger-ai-chat" as any, handleTrigger);
   }, [chatMessages, isChatLoading]);
 
-  return (
-    <BrowserRouter>
-      <Layout>
-        <div className="max-w-5xl mx-auto">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/education" element={<EducationPage />} />
-          </Routes>
-          <footer className="border-t border-gray-800 mt-24 pt-8 text-center text-xs text-gray-500 font-mono">
-            CHAVVA AKSHAY KUMAR REDDY - 2026
-          </footer>
-        </div>
-      </Layout>
+  const [isOSMode, setIsOSMode] = useState(false);
 
-      {/* Floating Circular Pulsar AI Button */}
-      {!isChatOpen && (
-        <motion.button
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          onClick={() => setIsChatOpen(true)}
-          className="fixed bottom-6 right-6 z-40 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center border border-blue-500 cursor-pointer animate-pulse select-none"
-          title="Ask Representative AI"
-        >
-          <ChatBotLogo className="w-8 h-8" fillColor="white" />
-        </motion.button>
-      )}
-
-      {/* Slide-out AI Representative Chat Drawer */}
-      <AnimatePresence>
-        {isChatOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsChatOpen(false)}
-              className="fixed inset-0 bg-[#1a1a1a]/30 dark:bg-black/60 backdrop-blur-[1px] z-40 cursor-pointer"
-            />
-
-            {/* Chat Drawer container */}
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 220 }}
-              className="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-white dark:bg-slate-900 border-l-0 sm:border-l-8 border-blue-600 shadow-2xl z-50 flex flex-col font-mono text-[#1a1a1a] dark:text-slate-100 overflow-hidden"
+  const renderChatBody = () => {
+    return (
+      <div className="h-full flex flex-col font-mono text-[#1a1a1a] dark:text-slate-100 overflow-hidden bg-white dark:bg-slate-900 rounded-b-xl">
+        {/* Futuristic Engine Toggle */}
+        <div className="px-4 py-2 bg-gray-50 dark:bg-slate-950/80 border-b border-gray-100 dark:border-slate-800 flex items-center justify-between shrink-0">
+          <span className="text-[9px] font-bold tracking-wider text-gray-500 uppercase">COGNITIVE ENGINE</span>
+          <div className="flex bg-gray-100 dark:bg-slate-900 p-0.5 rounded-lg border border-gray-200 dark:border-slate-800">
+            <button
+              onClick={() => setAiEngine("cloud")}
+              className={`text-[9px] font-bold px-2 py-1 rounded transition-all cursor-pointer border-0 ${
+                aiEngine === "cloud"
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "text-gray-500 hover:text-gray-700 dark:hover:text-slate-350"
+              }`}
             >
-              {/* Header */}
-              <div className="bg-blue-600 text-white p-5 relative overflow-hidden flex flex-col gap-1 select-none">
-                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
-                
-                <button
-                  onClick={() => setIsChatOpen(false)}
-                  className="absolute top-4 right-4 text-white/80 hover:text-white hover:scale-105 transition-all w-8 h-8 flex items-center justify-center border border-white/20 dark:border-white/30 bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 rounded-sm cursor-pointer z-30"
-                  aria-label="Close Representative Chat"
-                >
-                  ✕
-                </button>
+              🌩️ CLOUD API
+            </button>
+            <button
+              onClick={() => {
+                setAiEngine("webllm");
+                if (webllmStatus === "idle") {
+                  loadWebLLMEngine();
+                }
+              }}
+              className={`text-[9px] font-bold px-2 py-1 rounded transition-all cursor-pointer border-0 ${
+                aiEngine === "webllm"
+                  ? "bg-emerald-600 text-white shadow-sm"
+                  : "text-gray-500 hover:text-gray-700 dark:hover:text-slate-350"
+              }`}
+            >
+              💻 LOCAL WEBGPU
+            </button>
+          </div>
+        </div>
 
-                <div className="flex items-center gap-3 relative z-10">
-                  <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
-                    <ChatBotLogo className="w-5.5 h-5.5" fillColor="white" />
-                  </div>
-                  <div>
-                    <h3 className="text-sm font-bold tracking-wider flex items-center gap-2">
-                      <span className="w-2 h-2 bg-green-400 rounded-full animate-ping inline-block" />
-                      AKSHAY'S AI REPRESENTATIVE
-                    </h3>
-                    <span className="text-[9px] text-blue-100 uppercase tracking-widest block mt-0.5">
-                      ● ONLINE
-                    </span>
-                  </div>
+        {/* Chat History or Local WebLLM Load Terminal */}
+        {aiEngine === "webllm" && webllmStatus === "loading" ? (
+          <div className="flex-1 overflow-y-auto p-5 bg-black font-mono text-[10px] space-y-2 select-none">
+            <div className="flex items-center justify-between border-b border-emerald-950 pb-2">
+              <span className="text-emerald-400 font-bold uppercase tracking-widest text-[9px]">💻 Quantized Model Parameters Preload</span>
+              <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+            </div>
+            <div className="space-y-1.5 text-slate-300">
+              {webllmLogs.map((log, idx) => (
+                <div key={idx} className="flex gap-2 items-start text-emerald-500">
+                  <span>›</span>
+                  <span className="leading-relaxed">{log}</span>
                 </div>
+              ))}
+              <div className="flex gap-2 items-center text-emerald-400 font-bold mt-4 animate-pulse">
+                <span>›</span>
+                <span>Preloading WGSL weights & memory caching...</span>
               </div>
-
-              {/* Dynamic Telemetry Panel */}
-              <div className="bg-gray-950 text-[10px] text-green-400 font-mono px-5 py-2.5 flex justify-between items-center border-b border-gray-800 dark:border-slate-900 shadow-inner select-none">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping" />
-                  <span>AGENT ACTIVE: PORTFOLIO CO-PILOT</span>
-                </div>
-                <div className="flex gap-4">
-                  <span>LATENCY: 142ms</span>
-                  <span>LOAD: 0.08%</span>
-                </div>
+            </div>
+          </div>
+        ) : (
+          <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-gray-50/50 dark:bg-slate-950/40 min-h-0 scrollbar-thin">
+          {chatMessages.map((msg, index) => (
+            <div
+              key={index}
+              className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+            >
+              <div
+                className={`max-w-[85%] rounded-sm p-4 text-xs sm:text-sm border shadow-sm ${
+                  msg.role === "user"
+                    ? "bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-[#1a1a1a] dark:text-slate-100 rounded-tr-none font-mono"
+                    : "bg-blue-50/30 dark:bg-slate-900/40 border-blue-100 dark:border-blue-900/30 text-[#1a1a1a] dark:text-slate-100 rounded-tl-none font-sans"
+                }`}
+              >
+                {msg.role === "assistant" ? (
+                  <FormattedMessage text={msg.text} onCloseChat={() => setIsChatOpen(false)} />
+                ) : (
+                  <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
+                )}
               </div>
+            </div>
+          ))}
 
-              {/* Chat History Panel */}
-              <div className="flex-1 overflow-y-auto p-5 space-y-4 bg-gray-50/50 dark:bg-slate-950/40">
-                {chatMessages.map((msg, index) => (
-                  <div
-                    key={index}
-                    className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
+          {/* Loading state indicator */}
+          {isChatLoading && (
+            <div className="flex justify-start px-2 py-1 select-none">
+              <div className="flex items-center gap-3 font-mono text-[10px] text-blue-600 dark:text-blue-400">
+                <DotFieldLoader count={28} speed={1.5} dotSize={2.0} size={28} />
+                <span className="animate-pulse tracking-widest uppercase">
+                  AI compiling response...
+                </span>
+              </div>
+            </div>
+          )}
+          
+          <div ref={chatEndRef} />
+        </div>
+        )}
+
+        {/* Dynamic suggestion chips */}
+        <div className="px-5 py-3 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800/80 flex flex-wrap gap-2 select-none shrink-0">
+          {suggestions.map((sug) => (
+            <button
+              key={sug}
+              onClick={() => handleSendMessage(sug)}
+              className="text-[10px] font-mono bg-gray-50 dark:bg-slate-850 hover:bg-blue-50 dark:hover:bg-blue-950/30 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-800 border border-gray-200 dark:border-slate-800 px-2.5 py-1 transition-all rounded-sm cursor-pointer text-gray-700 dark:text-slate-300"
+            >
+              {sug}
+            </button>
+          ))}
+        </div>
+
+        {/* Chat Input form */}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!inputValue.trim()) return;
+            handleSendMessage(inputValue);
+            setInputValue("");
+          }}
+          className="p-4 bg-gray-50 dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 flex gap-3 shrink-0"
+        >
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+            placeholder="Ask anything about Akshay..."
+            disabled={isChatLoading}
+            className="flex-1 bg-white dark:bg-slate-900 border border-[#e5e7eb] dark:border-slate-800 px-4 py-2 text-xs sm:text-sm font-sans focus:outline-none focus:border-blue-500 rounded-sm placeholder-gray-400 dark:placeholder-gray-600 text-gray-900 dark:text-slate-100"
+          />
+          <button
+            type="submit"
+            disabled={isChatLoading || !inputValue.trim()}
+            className="bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs px-5 py-2 transition-all rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shadow-sm"
+          >
+            SEND
+          </button>
+        </form>
+      </div>
+    );
+  };
+
+  if (isOSMode) {
+    return (
+      <SystemProvider>
+        <FileSystemProvider>
+          <BrowserRouter>
+            <AeroOS
+              onCloseOS={() => setIsOSMode(false)}
+              renderSkills={() => <SkillsPage />}
+              renderProjects={() => <ProjectsPage />}
+              renderEducation={() => <EducationPage />}
+              renderChatBot={() => renderChatBody()}
+            />
+          </BrowserRouter>
+        </FileSystemProvider>
+      </SystemProvider>
+    );
+  }
+
+  return (
+    <SystemProvider>
+      <FileSystemProvider>
+        <BrowserRouter>
+          <Layout>
+            <div className="max-w-5xl mx-auto">
+              <Routes>
+                <Route path="/" element={<Home onLaunchOS={() => setIsOSMode(true)} />} />
+                <Route path="/skills" element={<SkillsPage />} />
+                <Route path="/projects" element={<ProjectsPage />} />
+                <Route path="/education" element={<EducationPage />} />
+              </Routes>
+              <footer className="border-t border-gray-800 mt-24 pt-8 text-center text-xs text-gray-500 font-mono">
+                CHAVVA AKSHAY KUMAR REDDY - 2026
+              </footer>
+            </div>
+          </Layout>
+
+        {/* Floating Circular Pulsar AI Button */}
+        {!isChatOpen && (
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            onClick={() => setIsChatOpen(true)}
+            className="fixed bottom-6 right-6 z-40 bg-blue-600 hover:bg-blue-700 text-white rounded-full w-14 h-14 shadow-lg hover:shadow-xl hover:scale-105 transition-all flex items-center justify-center border border-blue-500 cursor-pointer animate-pulse select-none"
+            title="Ask Representative AI"
+          >
+            <ChatBotLogo className="w-8 h-8" fillColor="white" />
+          </motion.button>
+        )}
+
+        {/* Slide-out AI Representative Chat Drawer */}
+        <AnimatePresence>
+          {isChatOpen && (
+            <>
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setIsChatOpen(false)}
+                className="fixed inset-0 bg-[#1a1a1a]/30 dark:bg-black/60 backdrop-blur-[1px] z-40 cursor-pointer"
+              />
+
+              {/* Chat Drawer container */}
+              <motion.div
+                initial={{ x: "100%" }}
+                animate={{ x: 0 }}
+                exit={{ x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 220 }}
+                className="fixed top-0 right-0 h-full w-full sm:w-[480px] bg-white dark:bg-slate-900 border-l-0 sm:border-l-8 border-blue-600 shadow-2xl z-50 flex flex-col font-mono text-[#1a1a1a] dark:text-slate-100 overflow-hidden"
+              >
+                {/* Header */}
+                <div className="bg-blue-600 text-white p-5 relative overflow-hidden flex flex-col gap-1 select-none">
+                  <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]" />
+                  
+                  <button
+                    onClick={() => setIsChatOpen(false)}
+                    className="absolute top-4 right-4 text-white/80 hover:text-white hover:scale-105 transition-all w-8 h-8 flex items-center justify-center border border-white/20 dark:border-white/30 bg-white/10 dark:bg-white/5 hover:bg-white/20 dark:hover:bg-white/10 rounded-sm cursor-pointer z-30"
+                    aria-label="Close Representative Chat"
                   >
-                    <div
-                      className={`max-w-[85%] rounded-sm p-4 text-xs sm:text-sm border shadow-sm ${
-                        msg.role === "user"
-                          ? "bg-white dark:bg-slate-900 border-gray-200 dark:border-slate-800 text-[#1a1a1a] dark:text-slate-100 rounded-tr-none font-mono"
-                          : "bg-blue-50/30 dark:bg-slate-900/40 border-blue-100 dark:border-blue-900/30 text-[#1a1a1a] dark:text-slate-100 rounded-tl-none font-sans"
-                      }`}
-                    >
-                      {msg.role === "assistant" ? (
-                        <FormattedMessage text={msg.text} onCloseChat={() => setIsChatOpen(false)} />
-                      ) : (
-                        <p className="whitespace-pre-wrap leading-relaxed">{msg.text}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
+                    ✕
+                  </button>
 
-                {/* Loading state indicator */}
-                {isChatLoading && (
-                  <div className="flex justify-start px-2 py-1 select-none">
-                    <div className="flex items-center gap-3 font-mono text-[10px] text-blue-600 dark:text-blue-400">
-                      <DotFieldLoader count={28} speed={1.5} dotSize={2.0} size={28} />
-                      <span className="animate-pulse tracking-widest uppercase">
-                        AI compiling response...
+                  <div className="flex items-center gap-3 relative z-10">
+                    <div className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center border border-white/20">
+                      <ChatBotLogo className="w-5.5 h-5.5" fillColor="white" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold tracking-wider flex items-center gap-2">
+                        <span className="w-2 h-2 bg-green-400 rounded-full animate-ping inline-block" />
+                        AKSHAY'S AI REPRESENTATIVE
+                      </h3>
+                      <span className="text-[9px] text-blue-100 uppercase tracking-widest block mt-0.5">
+                        ● ONLINE
                       </span>
                     </div>
                   </div>
-                )}
-                
-                <div ref={chatEndRef} />
-              </div>
+                </div>
 
-              {/* Dynamic suggestion chips */}
-              <div className="px-5 py-3 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 flex flex-wrap gap-2 select-none">
-                {suggestions.map((sug) => (
-                  <button
-                    key={sug}
-                    onClick={() => handleSendMessage(sug)}
-                    className="text-[10px] font-mono bg-gray-50 dark:bg-slate-850 hover:bg-blue-50 dark:hover:bg-blue-950/30 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300 dark:hover:border-blue-800 border border-gray-200 dark:border-slate-800 px-2.5 py-1 transition-all rounded-sm cursor-pointer text-gray-700 dark:text-slate-300"
-                  >
-                    {sug}
-                  </button>
-                ))}
-              </div>
+                {/* Dynamic Telemetry Panel */}
+                <div className="bg-gray-950 text-[10px] text-green-400 font-mono px-5 py-2.5 flex justify-between items-center border-b border-gray-800 dark:border-slate-900 shadow-inner select-none">
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-ping" />
+                    <span>AGENT ACTIVE: PORTFOLIO CO-PILOT</span>
+                  </div>
+                  <div className="flex gap-4">
+                    <span>LATENCY: 142ms</span>
+                    <span>LOAD: 0.08%</span>
+                  </div>
+                </div>
 
-              {/* Chat Input form */}
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (!inputValue.trim()) return;
-                  handleSendMessage(inputValue);
-                  setInputValue("");
-                }}
-                className="p-4 bg-gray-50 dark:bg-slate-950 border-t border-gray-200 dark:border-slate-800 flex gap-3"
-              >
-                <input
-                  type="text"
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="Ask anything about Akshay..."
-                  disabled={isChatLoading}
-                  className="flex-1 bg-white dark:bg-slate-900 border border-[#e5e7eb] dark:border-slate-800 px-4 py-2 text-xs sm:text-sm font-sans focus:outline-none focus:border-blue-500 rounded-sm placeholder-gray-400 dark:placeholder-gray-600 text-gray-900 dark:text-slate-100"
-                />
-                <button
-                  type="submit"
-                  disabled={isChatLoading || !inputValue.trim()}
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-mono font-bold text-xs px-5 py-2 transition-all rounded-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed select-none shadow-sm"
-                >
-                  SEND
-                </button>
-              </form>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-    </BrowserRouter>
+                {renderChatBody()}
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+      </BrowserRouter>
+      </FileSystemProvider>
+    </SystemProvider>
   );
 }

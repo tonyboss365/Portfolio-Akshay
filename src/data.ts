@@ -9,7 +9,7 @@ export const RESUME_DATA = {
   },
   summary: "Computer Science and Engineering student with a CGPA of 9.77. Experienced in building AI-powered systems and full-stack web applications using Python, Java, React, and FastAPI. Developed deployed platforms including real-time AI conversation analytics and customer behavior dashboards.",
   education: [
-    { school: "KL University, Hyderabad", degree: "B.Tech in Computer Science and Engineering", duration: "2024 – Present", gpa: "9.77 / 10", url: "https://www.kluniversity.in/" },
+    { school: "KL University, Hyderabad", degree: "B.Tech in Computer Science and Engineering", duration: "2024 – 2028", gpa: "9.77 / 10", url: "https://www.kluniversity.in/" },
     { school: "Narayana Junior College", degree: "Intermediate (MPC)", duration: "2022 – 2024", gpa: "97.4%", url: "https://www.narayanagroup.com/" },
     { school: "Ravindra Bharathi High School", degree: "SSC", duration: "2022", gpa: "10 / 10", url: "https://rbschools.in/" }
   ],
@@ -27,13 +27,13 @@ export const RESUME_DATA = {
       name: "Learn-Flow",
       desc: "AI-Powered Course Creation & Learning Platform",
       longDesc: "An institutional-grade, AI-powered course creation and learning management platform built to optimize both student and instructor workflows. Features a highly contextual AI tutor, robust quiz engines with analytics, an advanced 5-step guided course creation wizard with automated AI copy generators, and seamless role-based authentication.",
-      tech: ["React", "Supabase", "NVIDIA Nemotron", "OpenRouter", "Tailwind CSS", "PostgreSQL"],
+      tech: ["React", "Supabase", "DevCore Neural Engine", "Tailwind CSS", "PostgreSQL"],
       github: "github.com/tonyboss365/Learn-Flow",
       live: "learn-flow-kappa.vercel.app",
       image: "/learn-flow-preview.png",
       features: [
         "Personalized Student Dashboard with lesson tracking & AI recommendations",
-        "Contextual AI Tutor (Chat) powered by NVIDIA Nemotron via OpenRouter",
+        "Contextual AI Tutor (Chat) powered by proprietary DevCore Neural Engine Integration",
         "5-step guided Instructor Course Creation Wizard with video uploads",
         "Quiz Engine with timed MCQs, instant scoring, and performance analytics",
         "Auto-generated Course Completion Certificates with verification codes",

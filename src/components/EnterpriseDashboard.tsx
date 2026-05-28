@@ -44,7 +44,7 @@ export function EnterpriseDashboard() {
   // Simulated console logs streaming state
   const [logs, setLogs] = useState<Array<{ time: string; msg: string; type: "system" | "model" | "metric" | "net" }>>([
     { time: "10:32:05", msg: "Telemetry server initialized...", type: "system" },
-    { time: "10:32:06", msg: "NVIDIA Nemotron 30B LLM cluster mapping resolved.", type: "model" },
+    { time: "10:32:06", msg: "DevCore Neural Engine cluster mapping resolved.", type: "model" },
     { time: "10:32:08", msg: "Education records parsed: KL University (GPA: 9.77)", type: "metric" },
     { time: "10:32:10", msg: "Secure database handshake completed successfully.", type: "system" }
   ]);
@@ -84,9 +84,9 @@ export function EnterpriseDashboard() {
       { msg: "Supabase connection active, caching pool checked.", type: "system" },
       { msg: "Skill detail indexing: TypeScript/React/FastAPI models compiled.", type: "metric" },
       { msg: "GDG Hack Ananta participant profile authenticated.", type: "metric" },
-      { msg: "OpenRouter stream latency calibrated.", type: "net" },
+      { msg: "DevCore stream latency calibrated.", type: "net" },
       { msg: "Simulated load: 456 queries parsed.", type: "net" },
-      { msg: "NVIDIA model nemotron-3-nano-30b loaded.", type: "model" },
+      { msg: "DevCore model pipeline loaded.", type: "model" },
       { msg: "Active project routing validated.", type: "system" },
       { msg: "Apple Intelligence aurora mesh gradient rendered.", type: "system" },
       { msg: "Smart India Hackathon credentials checked.", type: "metric" },
@@ -139,7 +139,7 @@ export function EnterpriseDashboard() {
     founder: {
       headline: "Accelerated Custom AI Platforms for SaaS Founders",
       highlights: [
-        { label: "AI Handshake", value: "OpenRouter & NVIDIA API Integration" },
+        { label: "AI Handshake", value: "DevCore Neural Engine Integration" },
         { label: "Streaming Backend", value: "FastAPI, WebSockets, REST APIs" },
         { label: "Data Architecture", value: "PostgreSQL, MySQL, MongoDB" }
       ],
@@ -321,7 +321,7 @@ export function EnterpriseDashboard() {
                 >
                   {Math.round(apiLatency)}ms
                 </motion.span>
-                <span className="text-[8px] text-gray-400 font-mono mt-1 uppercase">Nemotron latency</span>
+                <span className="text-[8px] text-gray-400 font-mono mt-1 uppercase">Neural latency</span>
               </div>
               <span className="text-[9px] font-mono font-bold text-gray-400 dark:text-slate-500 uppercase mt-2 tracking-wider">AI LATENCY</span>
             </div>

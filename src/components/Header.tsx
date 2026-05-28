@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { RESUME_DATA } from "../data";
 import { EyeButton } from "./EyeButton";
 
-export function Header() {
+export function Header({ onLaunchOS }: { onLaunchOS?: () => void }) {
   return (
     <header className="border-b border-gray-200 dark:border-slate-800 pb-12 mb-16">
       <div className="flex justify-between items-center text-xs text-gray-500 dark:text-slate-400 font-mono mb-8 select-none">
@@ -27,6 +27,16 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-3">
+          {onLaunchOS && (
+            <button
+              onClick={onLaunchOS}
+              className="flex items-center gap-1.5 px-3 py-1 bg-blue-600/10 hover:bg-blue-600 dark:bg-blue-500/10 dark:hover:bg-blue-500 text-blue-600 dark:text-blue-400 hover:text-white dark:hover:text-white border border-blue-500/35 hover:border-blue-500 rounded-full text-[10px] font-mono font-bold cursor-pointer transition-all hover:scale-105 active:scale-[0.98] mr-2 shadow-sm uppercase tracking-wider"
+              title="Launch AeroOS Desktop Layout"
+            >
+              <span className="w-1.5 h-1.5 bg-blue-500 dark:bg-blue-400 rounded-full animate-ping" />
+              ⚡ Launch AeroOS
+            </button>
+          )}
           <a
             href={`mailto:${RESUME_DATA.contact.email}`}
             title={`Email: ${RESUME_DATA.contact.email}`}
