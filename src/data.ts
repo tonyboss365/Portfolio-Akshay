@@ -46,7 +46,7 @@ export const RESUME_DATA = {
       longDesc: "A high-fidelity cinematic digital chronicle. An interactive architecture of gravity designed to chart planetary nodes and orbital telemetry in extreme brutalist contrast.",
       tech: ["WebGL", "Three.js", "Web Audio API", "Video Scrub API", "CSS Blend"],
       live: "orb-designer-solar-system.vercel.app",
-      image: "/placeholder.svg",
+      image: "/orb-preview.png",
       features: [
         "Camera-driven descent through a generative 3D procedural space helix.",
         "Nine monochromatic planetary cards with structured facts drawer.",
