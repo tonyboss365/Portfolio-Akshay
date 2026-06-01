@@ -165,7 +165,7 @@ export function CommandMenu() {
     },
     {
       icon: "ai",
-      label: "Ask AI about B.Tech CSE GPA (9.77)",
+      label: "Ask AI about B.Tech CSE GPA (9.8)",
       category: "Ask AI Agent",
       action: () => {
         window.dispatchEvent(new CustomEvent("trigger-ai-chat", { detail: "What is his B.Tech GPA?" }));

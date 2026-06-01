@@ -45,7 +45,7 @@ export function EnterpriseDashboard() {
   const [logs, setLogs] = useState<Array<{ time: string; msg: string; type: "system" | "model" | "metric" | "net" }>>([
     { time: "10:32:05", msg: "Telemetry server initialized...", type: "system" },
     { time: "10:32:06", msg: "DevCore Neural Engine cluster mapping resolved.", type: "model" },
-    { time: "10:32:08", msg: "Education records parsed: KL University (GPA: 9.77)", type: "metric" },
+    { time: "10:32:08", msg: "Education records parsed: KL University (GPA: 9.8)", type: "metric" },
     { time: "10:32:10", msg: "Secure database handshake completed successfully.", type: "system" }
   ]);
   const [isStreaming, setIsStreaming] = useState(true);
@@ -127,7 +127,7 @@ export function EnterpriseDashboard() {
     recruiter: {
       headline: "Rapid Technical Evaluation for Engineering Recruiters",
       highlights: [
-        { label: "B.Tech CSE GPA", value: "9.77 / 10.0" },
+        { label: "B.Tech CSE GPA", value: "9.8 / 10.0" },
         { label: "Competitive Solving", value: "LeetCode & CodeChef Active" },
         { label: "Core Expertise", value: "React, TypeScript, Node.js, Python" }
       ],
@@ -163,7 +163,7 @@ export function EnterpriseDashboard() {
     scholar: {
       headline: "Academic Track Record & Hackathon Standings",
       highlights: [
-        { label: "B.Tech CGPA", value: "9.77 / 10.0" },
+        { label: "B.Tech CGPA", value: "9.8 / 10.0" },
         { label: "Top Standing", value: "KL University Core Scholar" },
         { label: "Team Hackathons", value: "GDG Hack Ananta, SIH Participant" }
       ],

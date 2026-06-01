@@ -7,9 +7,9 @@ export const RESUME_DATA = {
     linkedin: "linkedin.com/in/akshay-kumar-reddy-chavva-0a43b1381",
     github: "github.com/tonyboss365"
   },
-  summary: "Computer Science and Engineering student with a CGPA of 9.77. Experienced in building AI-powered systems and full-stack web applications using Python, Java, React, and FastAPI. Developed deployed platforms including real-time AI conversation analytics and customer behavior dashboards.",
+  summary: "Computer Science and Engineering student with a CGPA of 9.8. Experienced in building AI-powered systems and full-stack web applications using Python, Java, React, and FastAPI. Developed deployed platforms including real-time AI conversation analytics and customer behavior dashboards.",
   education: [
-    { school: "KL University, Hyderabad", degree: "B.Tech in Computer Science and Engineering", duration: "2024 – 2028", gpa: "9.77 / 10", url: "https://www.kluniversity.in/" },
+    { school: "KL University, Hyderabad", degree: "B.Tech in Computer Science and Engineering", duration: "2024 – 2028", gpa: "9.8 / 10", url: "https://www.kluniversity.in/" },
     { school: "Narayana Junior College", degree: "Intermediate (MPC)", duration: "2022 – 2024", gpa: "97.4%", url: "https://www.narayanagroup.com/" },
     { school: "Ravindra Bharathi High School", degree: "SSC", duration: "2022", gpa: "10 / 10", url: "https://rbschools.in/" }
   ],
@@ -38,6 +38,22 @@ export const RESUME_DATA = {
         "Quiz Engine with timed MCQs, instant scoring, and performance analytics",
         "Auto-generated Course Completion Certificates with verification codes",
         "Secure role-based access routing & Session persistence via Supabase"
+      ]
+    },
+    {
+      name: "ORB Chronicles",
+      desc: "Cinematic Interactive Solar System Explorer",
+      longDesc: "A high-fidelity cinematic digital chronicle. An interactive architecture of gravity designed to chart planetary nodes and orbital telemetry in extreme brutalist contrast.",
+      tech: ["WebGL", "Three.js", "Web Audio API", "Video Scrub API", "CSS Blend"],
+      live: "orb-designer-solar-system.vercel.app",
+      image: "/placeholder.svg",
+      features: [
+        "Camera-driven descent through a generative 3D procedural space helix.",
+        "Nine monochromatic planetary cards with structured facts drawer.",
+        "Frame-scrubbed full-screen 3D solar flare gas simulation via scroll.",
+        "Magnetic cursor ring with mix-blend-mode difference inversion over panels.",
+        "Procedural soundscape with synthesized space chimes and static ripples.",
+        "Glassmorphic slide-in panels presenting deep space telemetry and facts."
       ]
     },
     {

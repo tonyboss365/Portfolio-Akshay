@@ -1019,7 +1019,7 @@ export default function App() {
 Chavva Akshay Kumar Reddy is pursuing a **B.Tech in Computer Science Engineering (CSE)** at **KL University** (2024 - 2028).
 
 ### PERFORMANCE INDICATORS
-- **Cumulative GPA**: **9.77 / 10.0** (Top 1% of his cohort).
+- **Cumulative GPA**: **9.8 / 10.0** (Top 1% of his cohort).
 - **Core Focus**: **Advanced Data Structures**, **AI/ML Architectures**, **Distributed Microservices**, and **Human-Computer Interaction**.
 - **Extracurricular**: Active representative at university technical committees and software incubation hubs.
 
@@ -1086,7 +1086,7 @@ Akshay actively participates in online coding challenges and maintains highly op
     return `### LOCAL COGNITIVE WEBLLM OFFLINE AGENT
 I am processing your query **on-device** using your **graphics card (WebGPU/WGSL)**. 
 
-Akshay is a **B.Tech CSE student** at **KL University** with a stellar **9.77 GPA**. He excels in building state-of-the-art web tools, including **Learn-Flow** (his flagship ed-tech platform), and custom operational frameworks like **AeroOS**.
+Akshay is a **B.Tech CSE student** at **KL University** with a stellar **9.8 GPA**. He excels in building state-of-the-art web tools, including **Learn-Flow** (his flagship ed-tech platform), and custom operational frameworks like **AeroOS**.
 
 Ask me about:
 - Akshay's flagship project **Learn-Flow**
@@ -1155,7 +1155,7 @@ Ask me about:
           messages: [
             {
               role: "system",
-              content: `You are Akshay's AI Representative, a helpful, highly professional, and extremely knowledgeable AI agent representing Chavva Akshay Kumar Reddy (a B.Tech CSE student at KL University with a 9.77 GPA, expert in front-end development, AI, and developer tools).
+              content: `You are Akshay's AI Representative, a helpful, highly professional, and extremely knowledgeable AI agent representing Chavva Akshay Kumar Reddy (a B.Tech CSE student at KL University with a 9.8 GPA, expert in front-end development, AI, and developer tools).
 Your responses MUST be neat, correct, and highly detailed.
 Crucial rule for formatting: Wrap all important concepts, project names, technical skills, metrics, and key statements in double asterisks **like this** to make them bold. Use headers (starting with ###) for all primary sections. The user's system will automatically highlight all bold text in blue, so make generous use of **bold highlights** for maximum impact.
 Be very detailed, structured, clear, and professional in your replies.
