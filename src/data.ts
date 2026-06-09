@@ -24,6 +24,20 @@ export const RESUME_DATA = {
   },
   projects: [
     {
+      name: "Richard Mille RM 53-02 Showcase",
+      desc: "Highly immersive, cinema-grade digital product showcase for the iconic Richard Mille RM 53-02 Tourbillon Sapphire.",
+      longDesc: "A highly immersive, cinema-grade digital product showcase for the iconic Richard Mille RM 53-02 Tourbillon Sapphire. Engineered with a philosophy matching the timepiece itself, the application pushes modern web boundaries through performance-optimized web standards.",
+      tech: ["HTML5 Canvas", "Web Audio API", "CSS Blend", "GSAP", "TypeScript"],
+      live: "rm-designer-website.vercel.app",
+      image: "/placeholder.svg",
+      features: [
+        "Immersive 360° Watch Scrubbing: Utilizes a custom 360-frame canvas animation engine with linear interpolation (LERP) that rotates the sapphire watch body based on scroll velocity.",
+        "Multilayered Ambient Soundscapes: Dynamic Web Audio API controller that crossfades audio streams based on scroll depth to replicate deep sea descent.",
+        "Cinematic Visual Polish: Responsive widescreen letterbox framing, magnetic custom cursor lens with difference blend modes, and dynamic scanline overlays.",
+        "Smooth Mobile Responsiveness: Compact HUD overlays, dual-column metrics grid, proper click focus handling, and layout flow avoiding overlaps."
+      ]
+    },
+    {
       name: "Learn-Flow",
       desc: "AI-Powered Course Creation & Learning Platform",
       longDesc: "An institutional-grade, AI-powered course creation and learning management platform built to optimize both student and instructor workflows. Features a highly contextual AI tutor, robust quiz engines with analytics, an advanced 5-step guided course creation wizard with automated AI copy generators, and seamless role-based authentication.",
