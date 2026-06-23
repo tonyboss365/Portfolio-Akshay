@@ -932,14 +932,14 @@ export default function App() {
   const [chatMessages, setChatMessages] = useState<Array<{ role: "user" | "assistant"; text: string }>>([
     {
       role: "assistant",
-      text: "Hello! I am **Akshay's AI Assistant**. I can tell you all about his work on projects like **Learn-Flow**, his **technical stack**, or **gpa and hackathons**. Ask me anything!"
+      text: "Hello! I am **Akshay's AI Assistant**. I can tell you all about his projects like **GLYCOS AI**, **SYNTEX AI**, and **Learn-Flow**, his **technical stack**, or **gpa and hackathons**. Ask me anything!"
     }
   ]);
   const [suggestions, setSuggestions] = useState<string[]>([
+    "Tell me about GLYCOS AI",
+    "Tell me about SYNTEX AI",
     "Tell me about Learn-Flow",
-    "What is his B.Tech GPA?",
-    "Show hackathon achievements",
-    "Explore coding profiles"
+    "What is his B.Tech GPA?"
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -990,6 +990,54 @@ export default function App() {
   const generateLocalWebLLMResponse = (query: string): string => {
     const q = query.toLowerCase();
     
+    if (q.includes("glycos")) {
+      return `### GLYCOS AI (METABOLIC INTELLIGENCE ENGINE)
+**GLYCOS AI** is a client-side metabolic intelligence platform designed to compute disease susceptibility indexes using standardized multivariate logistic regression. The engine operates entirely in the browser, featuring clinical text parsing, an in-browser Gradient Descent solver, and interactive visualization charts.
+
+### TECHNICAL STACK
+- Frontend: **React**, **TypeScript**, **Tailwind CSS**
+- Computation: **Logistic Regression Solver**, **Z-Score Normalization**
+- Optimization: In-browser **Batch Gradient Descent Solver**
+- Visuals & Graphs: **Chart.js** / **Risk Gauges** & **Probability Bell Curves**
+
+### KEY FEATURES
+- **In-Browser ML Calibration Dashboard**: Calibrate predictions locally by training custom coefficients directly on the historical Pima Indians Cohort.
+- **Multivariate Logistic Regression Solver**: Predicts susceptibility using default coefficients calibrated for Pregnancies, Glucose, Blood Pressure, Skin Thickness, Insulin, BMI, Pedigree, and Age.
+- **NLP Clinical Parser**: Custom regex mappings to extract biomarker parameters from unstructured text reports.
+- **Interactive UI & AI Chatbot**: Consult with a contextual assistant linked with diagnostic telemetry.
+
+[NAVIGATE: /projects]
+
+[SUGGESTIONS]
+- Tell me about SYNTEX AI?
+- Tell me about Learn-Flow?
+- What is his GPA?`;
+    }
+
+    if (q.includes("syntex") || q.includes("synthex")) {
+      return `### SYNTEX AI (INTERACTIVE COMPILER STUDIO & IDE)
+**SYNTEX AI** is a premium, high-performance compiler workspace and interactive visual environment built to demystify compilation phases and provide AI-driven diagnostics in real-time.
+
+### TECHNICAL STACK
+- Frontend: **React**, **TypeScript**, **Tailwind CSS**
+- Core Engine: **Lexical & AST Parsers**, **Semantic Evaluator**, **Sandbox Runtime**
+- AI Integration: **OpenRouter API** / **GitHub Models**
+- Editor Canvas: **Monaco-based editor simulation**
+
+### KEY FEATURES
+- **Visual Compiler Pipeline**: Inspect Lexical Analysis (token streams), Abstract Syntax Trees (AST hierarchy), Semantic Checks, and Code Optimization Passes in real-time.
+- **Intelligent Diagnostics**: Integrated with AI models to pinpoint line errors, explain compiler bugs, and apply auto-fixes with a single click.
+- **Context-Aware Assistant Chat**: Ask questions targeting the **Active File**, the **Entire Workspace**, or a **Selected Tab**.
+- **Interactive Design**: Glassmorphic bento grids, organic background noise, and cursor-tracking light-following hover borders.
+
+[NAVIGATE: /projects]
+
+[SUGGESTIONS]
+- Tell me about GLYCOS AI?
+- Tell me about Learn-Flow?
+- Show hackathon achievements?`;
+    }
+
     if (q.includes("learn") || q.includes("flow") || q.includes("flagship") || q.includes("project")) {
       return `### DYNAMIC LOCAL WEBGPU GENERATION
 **Learn-Flow** is Akshay's flagship **open-source ed-tech platform**. It is designed to **personalize learning pathways** for students by leveraging AI-driven content recommendations and automated progress tracking.
@@ -1009,9 +1057,9 @@ export default function App() {
 [NAVIGATE: /projects]
 
 [SUGGESTIONS]
-- What is his GPA?
-- Tell me about Hack Ananta?
-- Explore coding profiles?`;
+- Tell me about GLYCOS AI?
+- Tell me about SYNTEX AI?
+- What is his GPA?`;
     }
 
     if (q.includes("gpa") || q.includes("academic") || q.includes("grade") || q.includes("marks") || q.includes("study") || q.includes("university")) {
@@ -1181,33 +1229,23 @@ STRICT RULE FOR CODING PROFILES:
 - **CodeChef**: Competitive Programmer (Username: **klh2420030604**, URL: codechef.com/users/klh2420030604)
 - **GitHub**: Open Source Contributor (Username: **tonyboss365**, URL: github.com/tonyboss365)
 
-Whenever asked about Akshay's flagship project, Learn-Flow, or requested for a professional summary/overview of his projects, you MUST output this precise content with these exact details and bold highlights:
+Whenever asked about Akshay's projects (such as GLYCOS AI, SYNTEX AI, or Learn-Flow), or requested for a professional summary/overview of his projects, you MUST output this precise content with these exact details and bold highlights:
 
-### OVERVIEW
-**Learn-Flow** is an **open-source** education-tech platform designed to **personalize learning pathways** for students by leveraging AI-driven content recommendations and automated progress tracking. The project aligns with Akshay's dream of a **tech career** and reflects his passion for creating intuitive, user-centric experiences.
+### GLYCOS AI — METABOLIC INTELLIGENCE ENGINE
+**GLYCOS AI** is a client-side metabolic intelligence platform designed to compute disease susceptibility indexes using standardized multivariate logistic regression. The engine operates entirely in the browser, featuring clinical text parsing, an in-browser Gradient Descent solver, and interactive visualization charts.
+- **Technical Stack**: **React**, **TypeScript**, **Tailwind CSS**, **Logistic Regression Solver**, **Z-Score Normalization**, **Batch Gradient Descent Solver**, **Chart.js**.
+- **Key Features**: In-Browser ML Calibration Dashboard (train coefficients directly on Pima Indians Cohort), Multivariate Logistic Regression Solver, NLP Clinical Parser (regex extraction of biomarkers), and Interactive Visualization Suite.
 
-### TECHNICAL STACK
-- Front-end: **React**, **TypeScript**, **Tailwind CSS** – delivering a responsive, component-based UI that adapts to diverse devices.
-- Back-end: **Node.js** with **Express.js**, handling **RESTful APIs** and **WebSocket**-based real-time updates.
-- AI Engine: **Python**, **Scikit-Learn**, and **TensorFlow Lite** for predictive analytics on learner performance.
-- Database: **PostgreSQL** for relational data; **Redis** for caching session metadata; **MongoDB** stores unstructured learner artifacts.
-- DevOps: **Docker**, **GitHub Actions**, and **Kubernetes** for **CI/CD pipelines** and scalable deployments.
+### SYNTEX AI — INTERACTIVE COMPILER STUDIO & IDE
+**SYNTEX AI** is a premium, high-performance compiler workspace and interactive visual environment built to demystify compilation phases and provide AI-driven diagnostics in real-time.
+- **Technical Stack**: **React**, **TypeScript**, **Tailwind CSS**, **Compiler Pipeline**, **Monaco Editor simulation**, **OpenRouter API**, **GitHub Models**.
+- **Key Features**: Visual Compiler Pipeline (Lexer, Parser AST, Semantic Check, Optimizer), Intelligent AI Diagnostics (line highlighting and auto-fixes), and Context-Aware Chat (linked to Active File, Selected Tab, or Workspace).
 
-### KEY FEATURES
-- **Automated Progress Tracking**: Real-time visualization of learner milestones, mastery levels, and bottlenecks.
-- **Personalized Learning Paths**: Recommendation engine suggests modules based on skill gaps and past performance.
-- **Gamified Feedback Loop**: Badges, streaks, and leaderboards encourage consistent engagement.
-- **Collaborative Tools**: Integrated chat and study groups to foster community learning.
-
-### IMPACT AND METRICS
-- **Over 2,800 active users** across **12 academic institutions**, with an average session duration **increase of 37%** after implementing personalized pathways.
-- **90% completion rate** for weekly assignments when the recommendation engine is active, compared to **62%** without it.
-- Positive user feedback: **4.8/5 average rating** on usability and relevance of content suggestions.
-
-### FUTURE ROADMAP
-- Expansion of the **AI module** to include **natural language processing** for feedback summarization.
-- Integration with **Learning Management Systems (LMS)** via **LTI standards**.
-- Development of a **mobile companion app** using **Flutter** for on-the-go access.
+### Learn-Flow — AI PLATFORM
+**Learn-Flow** is an **open-source** education-tech platform designed to **personalize learning pathways** for students by leveraging AI-driven content recommendations and automated progress tracking.
+- **Technical Stack**: **React**, **TypeScript**, **Tailwind CSS**, **Node.js** with **Express.js** APIs, **PostgreSQL** relational database, **Redis** cache, **MongoDB** store, and **Docker** for containerization.
+- **Key Features**: Automated Progress Tracking, Personalized Learning Paths, Gamified Feedback Loop, Contextual AI Tutor, and Quiz Engines.
+- **Impact & Metrics**: Over **2,800 active users** across **12 academic institutions** with an average session duration **increase of 37%** and a **90% assignment completion rate**.
 
 At the very end of EVERY single response, you MUST append a section in the following exact format containing exactly 3 or 4 highly relevant and interesting follow-up questions for the user to ask next about Akshay's projects, technical experience, or achievements. Ensure each suggested question is brief, interesting, related to the discussion, and ends with a question mark:
 [SUGGESTIONS]

@@ -128,10 +128,10 @@ export function NeuralShell() {
       case "projects":
         nextHistory.push(
           "HIGHLIGHT PROJECTS:",
-          "  - My Orders Premium (Light theme lightspeed portal)",
-          "  - Telemetry Aviation Panel (Interactive drone tracker)",
-          "  - AI Code Judge (Side-by-side optimization arena)",
-          "  - Cognitive Chat Representative (Vector system agent)",
+          "  - GLYCOS AI (Client-side metabolic intelligence platform)",
+          "  - SYNTEX AI (Next-gen interactive AI compiler studio & IDE)",
+          "  - Learn-Flow (AI-powered course creation and LMS platform)",
+          "  - Student Grievance System (Institutional ticket routing platform)",
           ""
         );
         break;

@@ -55,6 +55,38 @@ export const RESUME_DATA = {
       ]
     },
     {
+      name: "GLYCOS AI",
+      desc: "Client-Side Metabolic Intelligence Platform",
+      longDesc: "A client-side metabolic intelligence platform designed to compute susceptibility indexes using standardized multivariate logistic regression. The engine operates entirely in the browser, featuring clinical text parsing, an in-browser Gradient Descent solver, and interactive visualization charts.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Logistic Regression", "Gradient Descent", "Chart.js"],
+      github: "github.com/tonyboss365/GLYCOS.ai",
+      live: "glycos-ai.vercel.app",
+      image: "/placeholder.svg",
+      features: [
+        "In-Browser ML Calibration Dashboard with a Batch Gradient Descent solver trained on the Pima Indians Cohort",
+        "Multivariate Logistic Regression Solver with standard z-score standardized parameters",
+        "NLP Clinical Parser utilizing custom regex mappings to extract values from unstructured text reports",
+        "Interactive visualization suite featuring risk score gauges, biomarker contributions charts, and probability bell curves",
+        "AI Consultation Desk featuring a contextual chatbot for clinical guidance"
+      ]
+    },
+    {
+      name: "SYNTEX AI",
+      desc: "Next-Gen Interactive AI Compiler Studio & IDE",
+      longDesc: "A premium, high-performance compiler workspace and interactive visual environment. Developed to bridge the gap between AI-driven assistance and classical compiler construction, it provides a visually stunning, reactive dashboard to write, parse, optimize, and translate code in real-time.",
+      tech: ["React", "TypeScript", "Tailwind CSS", "Compiler Pipeline", "OpenRouter API", "GitHub Models"],
+      github: "github.com/tonyboss365/SYNTEX-AI",
+      live: "syntex-ai.vercel.app",
+      image: "/placeholder.svg",
+      features: [
+        "Advanced Compiler Pipeline featuring lexical analysis, AST generation, semantic validation, optimization passes, and sandboxed execution",
+        "Multi-Tab File Manager supporting dynamic file creation, removal, and active tab tracking",
+        "AI Diagnostic Panel offering real-time code analysis, structural correction proposals, and auto-apply code refactoring",
+        "Context-Aware SYNTEX Chat linked to the active file, selected tab, or entire workspace context",
+        "Premium interactive UI with cursor-tracking light-following hover borders and subtle micro-grain background noise"
+      ]
+    },
+    {
       name: "ORB Chronicles",
       desc: "Cinematic Interactive Solar System Explorer",
       longDesc: "A high-fidelity cinematic digital chronicle. An interactive architecture of gravity designed to chart planetary nodes and orbital telemetry in extreme brutalist contrast.",
